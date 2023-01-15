@@ -2,7 +2,6 @@ package com.example.cricket.di
 
 import com.example.cricket.network.MatchesApi
 import com.example.cricket.repository.CricketRepository
-import com.example.cricket.utils.Constants
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -21,7 +20,7 @@ object AppModule {
     @Provides
     fun providesMatchesRepository(api: MatchesApi) = CricketRepository(api)
 
-    var gson = GsonBuilder()
+    private var gson = GsonBuilder()
         .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
         .create()
 
@@ -29,7 +28,7 @@ object AppModule {
     @Provides
     fun provideQuestionApi(): MatchesApi {
         return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(MatchesApi.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(MatchesApi::class.java)

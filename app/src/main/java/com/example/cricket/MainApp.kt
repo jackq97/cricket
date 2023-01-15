@@ -5,9 +5,9 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.example.cricket.composables.BottomBar
-import com.example.cricket.composables.TopBar
 import com.example.cricket.screen.NavGraphs
+import com.example.cricket.ui.composables.BottomBar
+import com.example.cricket.ui.composables.TopBar
 import com.ramcosta.composedestinations.DestinationsNavHost
 
 @Composable
@@ -17,7 +17,7 @@ fun SampleApp(){
 
     Scaffold(
 
-        topBar = {TopBar()},
+        topBar = { TopBar() },
         bottomBar = { BottomBar(navController = navController) },
         content = {
             DestinationsNavHost(

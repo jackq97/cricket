@@ -68,7 +68,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
 
     //Dagger - Hilt
-    implementation 'com.google.dagger:hilt-android:2.44'
+    implementation 'com.google.dagger:hilt-android:2.44.2'
     //May need ok http also
 
     // Dagger - Hilt
@@ -87,26 +87,26 @@ dependencies {
     implementation 'androidx.activity:activity-compose:1.6.1'
     implementation "androidx.compose.ui:ui:$compose_ui_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
-    implementation 'androidx.compose.material:material:1.3.0'
+    implementation 'androidx.compose.material:material:1.3.1'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 
     //swipe functionality
-    implementation 'com.google.accompanist:accompanist-swiperefresh:0.27.0'
+    implementation 'com.google.accompanist:accompanist-swiperefresh:0.28.0'
 
     //material theme
-    implementation("androidx.compose.material3:material3:1.1.0-alpha01")
-    implementation("androidx.compose.material3:material3-window-size-class:1.1.0-alpha01")
+    implementation("androidx.compose.material3:material3:1.1.0-alpha03")
+    implementation("androidx.compose.material3:material3-window-size-class:1.1.0-alpha03")
 
     //navigation
-    implementation ("androidx.navigation:navigation-compose:2.6.0-alpha03")
+    implementation ("androidx.navigation:navigation-compose:2.6.0-alpha04")
 
     //compose destinations
-    implementation 'io.github.raamcosta.compose-destinations:core:1.7.25-beta'
+    implementation 'io.github.raamcosta.compose-destinations:core:1.7.30-beta'
     ksp 'io.github.raamcosta.compose-destinations:ksp:1.7.25-beta'
 
     //coil

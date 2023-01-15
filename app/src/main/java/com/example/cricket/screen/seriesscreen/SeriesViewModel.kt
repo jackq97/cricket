@@ -1,3 +1,4 @@
+package com.example.cricket.screen.seriesscreen/*
 package com.example.cricket.screen
 
 import androidx.compose.runtime.MutableState
@@ -5,7 +6,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cricket.repository.CricketRepository
-import com.example.cricket.utils.ApiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -13,20 +13,20 @@ import java.time.Instant
 import javax.inject.Inject
 
 @HiltViewModel
-class CurrentMatchesViewModel @Inject constructor(
+class SeriesViewModel @Inject constructor(
     private val cricketRepository: CricketRepository
 ): ViewModel()  {
 
     var response: MutableState<ApiState> = mutableStateOf(ApiState.Empty)
 
     init {
-        getCurrentMatches()
+        getAllSeries()
     }
 
-  private fun getCurrentMatches() = viewModelScope.launch {
+  private fun getAllSeries() = viewModelScope.launch {
 
         cricketRepository
-            .getCurrentMatches()
+            .getAllSeries()
 
             .onStart {
 
@@ -47,9 +47,9 @@ class CurrentMatchesViewModel @Inject constructor(
 
     fun refresh() = viewModelScope.launch {
         _isRefreshing.update { true }
-        getCurrentMatches()
+        getAllSeries()
         _currentTime.value = Instant.now()
         _isRefreshing.update { false }
     }
 
-}
+}*/
