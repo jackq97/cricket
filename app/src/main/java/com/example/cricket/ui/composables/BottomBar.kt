@@ -14,6 +14,7 @@ import com.example.cricket.screen.NavGraphs
 import com.example.cricket.screen.destinations.DirectionDestination
 import com.example.cricket.screen.destinations.HomeScreenDestination
 import com.example.cricket.screen.destinations.MatchesScreenDestination
+import com.example.cricket.screen.destinations.SeriesScreenDestination
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.navigation.popBackStack
 import com.ramcosta.composedestinations.navigation.popUpTo
@@ -70,5 +71,5 @@ enum class BottomBarItem(
 
     CurrentMatchesScreen(HomeScreenDestination, Icons.Default.List, "Current Matches"),
     AllMatchesScreen(MatchesScreenDestination, Icons.Default.Person, "Matches"),
-    //SeriesScreen(SeriesScreenDestination, Icons.Default.Person, "Series")
+    SeriesScreen(SeriesScreenDestination, Icons.Default.Person, "Series")
 }

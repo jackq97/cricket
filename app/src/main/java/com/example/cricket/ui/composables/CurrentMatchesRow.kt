@@ -1,5 +1,6 @@
 package com.example.cricket.ui.composables
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -26,6 +27,7 @@ import com.example.cricket.R
 import com.example.cricket.model.currentmatches.CurrentData
 import com.example.cricket.model.previewparameter.CurrentMatchesDataPreviewParameterProvider
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun CurrentMatchesRow(data: CurrentData) {
 

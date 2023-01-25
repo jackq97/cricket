@@ -16,11 +16,6 @@ import javax.inject.Inject
 class CricketRepository @Inject constructor(
     private val api: MatchesApi) {
 
-    /*// making an object of our wrapper class
-    fun getCurrentMatches(): Flow<CurrentMatches> = flow {
-        emit(api.getCurrentMatches())
-    }.flowOn(Dispatchers.IO)*/
-
     suspend fun getCurrentMatches(): Resource<CurrentMatches> {
         return try {
             val result = api.getCurrentMatches()
@@ -55,14 +50,26 @@ class CricketRepository @Inject constructor(
         }
     }
 
-    /*// making an object of our wrapper class
-    fun getAllMatches(): Flow<AllMatches> = flow {
-        emit(api.getAllMatches())
-    }.flowOn(Dispatchers.IO)
-*/
-    // making an object of our wrapper class
-    fun getAllSeries(): Flow<Series> = flow {
+    /*fun getAllSeries(): Flow<Series> = flow {
         emit(api.getAllSeries())
-    }.flowOn(Dispatchers.IO)
+    }.flowOn(Dispatchers.IO)*/
+
+    suspend fun getAllSeries(): Resource<Series> {
+        return try {
+            val result = api.getAllSeries()
+            Resource.Success(result)
+        } catch(e: IOException) {
+            e.printStackTrace()
+            Resource.Error(
+                message = "Couldn't load company info"
+            )
+        } catch(e: HttpException) {
+            e.printStackTrace()
+            Resource.Error(
+                message = "Couldn't load company info"
+            )
+        }
+    }
+
 
 }

@@ -21,7 +21,7 @@ object AppModule {
     fun providesMatchesRepository(api: MatchesApi) = CricketRepository(api)
 
     private var gson = GsonBuilder()
-        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        .setDateFormat("yyyy-MM-dd")
         .create()
 
     @Singleton
