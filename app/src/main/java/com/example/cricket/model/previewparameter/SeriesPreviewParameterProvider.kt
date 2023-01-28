@@ -3,6 +3,7 @@ package com.example.cricket.model.previewparameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.example.cricket.model.series.SeriesData
 
+/*
 class SeriesPreviewParameterProvider : PreviewParameterProvider<SeriesData> {
 
     override val values = sequenceOf(
@@ -19,3 +20,4 @@ class SeriesPreviewParameterProvider : PreviewParameterProvider<SeriesData> {
         )
     )
 }
+*/

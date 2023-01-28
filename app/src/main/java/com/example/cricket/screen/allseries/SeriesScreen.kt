@@ -53,16 +53,11 @@ fun SeriesScreen( viewModel: SeriesViewModel = hiltViewModel()) {
                         val grouped = series.data.groupBy { it.startDate }
 
                         SeriesList(grouped = grouped)
-
-                        LazyColumn() {
-                            items(items = series.data) { data ->
-                                SeriesRow(seriesData = data)
-                            }
-                        }
                     }
                 }
             }
         }
+    }
 
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -72,15 +67,13 @@ fun SeriesScreen( viewModel: SeriesViewModel = hiltViewModel()) {
                 CircularProgressIndicator()
             } else if (state.error != null) {
 
-                Text(text = "fuddu")
             }
         }
     }
-}
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun SeriesList(grouped: Map<String, List<SeriesData>>) {
+fun SeriesList(grouped: Map<Date, List<SeriesData>>) {
 
     LazyColumn() {
         grouped.forEach { (date, seriesData) ->

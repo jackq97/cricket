@@ -1,5 +1,7 @@
 package com.example.cricket.model.series
 
+import java.util.*
+
 data class SeriesData(
     var endDate: String,
     var id: String,
@@ -7,7 +9,7 @@ data class SeriesData(
     var name: String,
     var odi: Int,
     var squads: Int,
-    var startDate: String,
+    var startDate: Date,
     var t20: Int,
     var test: Int
 )

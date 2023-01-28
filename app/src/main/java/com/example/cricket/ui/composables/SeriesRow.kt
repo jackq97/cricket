@@ -10,10 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import com.example.cricket.model.previewparameter.SeriesPreviewParameterProvider
 import com.example.cricket.model.series.SeriesData
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -24,7 +21,7 @@ fun SeriesRow(seriesData: SeriesData) {
         .height(IntrinsicSize.Max)
         .fillMaxWidth()
         .padding(12.dp),
-       // .clickable { navigator.navigate(SeriesInfoScreenDestination(id = seriesData.id)) },
+        /*.clickable { navigator.navigate(SeriesInfoScreenDestination(id = seriesData.id)) },*/
         horizontalAlignment = Alignment.Start,
 
         ) {
