@@ -1,3 +1,4 @@
+
 package com.example.cricket.ui.composables
 
 import androidx.compose.foundation.Image
@@ -24,6 +25,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.cricket.R
 import com.example.cricket.model.allmatches.AllData
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -94,7 +96,13 @@ fun AllMatchesRow(allMatchesData: AllData) {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
 
-                        val timeFmt = SimpleDateFormat("HH:mm", Locale.getDefault())
+                        val timeFmt = SimpleDateFormat("hh:mm", Locale.US)
+
+                        /*val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
+                        val outputFormat: DateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+                        //val inputText = "2012-11-17T00:00:00.000-05:00"
+                        val date: Date = inputFormat.parse(allMatchesData.dateTimeGMT) as Date
+                        val outputText: String = outputFormat.format(date)*/
 
                         Text(
                             text = timeFmt.format(allMatchesData.dateTimeGMT),
@@ -104,7 +112,15 @@ fun AllMatchesRow(allMatchesData: AllData) {
                             fontSize = 10.sp
                         )
 
+                        //TODO("date for matches")
+
                         val dateFmt = SimpleDateFormat("dd MMM", Locale.getDefault())
+
+                        /*val fmtInputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
+                        val fmtOutputFormat: DateFormat = SimpleDateFormat("dd MM", Locale.getDefault())
+                        //val fmtInputText = "2012-11-17T00:00:00.000-05:00"
+                        val fmtDate: Date = fmtOutputFormat.parse(allMatchesData.dateTimeGMT) as Date
+                        val fmtOutputText: String = outputFormat.format(fmtDate)*/
 
                         Text(
                             text = dateFmt.format(allMatchesData.dateTimeGMT),

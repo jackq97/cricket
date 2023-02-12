@@ -20,6 +20,7 @@ import com.example.cricket.ui.composables.SeriesRow
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.ramcosta.composedestinations.annotation.Destination
+import java.text.SimpleDateFormat
 import java.util.*
 
 @Destination
@@ -50,9 +51,9 @@ fun SeriesScreen( viewModel: SeriesViewModel = hiltViewModel()) {
                             viewModel.onEvent(SeriesEvent.Refresh)
                         }) {
 
-                        val grouped = series.data.groupBy { it.startDate }
+                        val groupedMonth = series.data.groupBy { it.startDate.month }
 
-                        SeriesList(grouped = grouped)
+                        SeriesList(groupedMonth = groupedMonth)
                     }
                 }
             }
@@ -73,20 +74,23 @@ fun SeriesScreen( viewModel: SeriesViewModel = hiltViewModel()) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun SeriesList(grouped: Map<Date, List<SeriesData>>) {
+fun SeriesList(groupedMonth: Map<Int , List<SeriesData>>) {
 
     LazyColumn() {
-        grouped.forEach { (date, seriesData) ->
+        groupedMonth.forEach { (date, seriesData) ->
             stickyHeader {
 
+                val dateFmt = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+
                 Text(
-                    text = date.toString(),
-                    color = Color.White,
-                    modifier = Modifier
-                        .background(Color.Gray)
-                        .padding(5.dp)
-                        .fillMaxWidth()
-                )
+                        text = dateFmt.format(seriesData.first().startDate),
+                        color = Color.White,
+                        modifier = Modifier
+                            .background(Color.Gray)
+                            .padding(5.dp)
+                            .fillMaxWidth()
+                    )
+
             }
 
             items(items = seriesData) { data ->
@@ -95,6 +99,4 @@ fun SeriesList(grouped: Map<Date, List<SeriesData>>) {
         }
     }
 }
-
-
 

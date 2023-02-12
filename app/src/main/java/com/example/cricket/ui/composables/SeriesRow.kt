@@ -13,6 +13,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.cricket.model.series.SeriesData
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable()
 fun SeriesRow(seriesData: SeriesData) {
@@ -32,13 +34,12 @@ fun SeriesRow(seriesData: SeriesData) {
             overflow = TextOverflow.Ellipsis
         )
 
-        Text(text = "${seriesData.startDate} - ${seriesData.startDate}",
+        val timeFmt = SimpleDateFormat("MMM d", Locale.getDefault())
+
+        Text(text = "${timeFmt.format(seriesData.startDate)} - ${seriesData.endDate}",
             color = Color.DarkGray
         )
     }
-
-    Divider(modifier = Modifier.fillMaxWidth(),
-        color = Color.Black)
 }
 
 
