@@ -44,7 +44,7 @@ fun CurrentMatchesRow(data: CurrentData) {
     ) {
 
         Row {
-            Text(text = if(data.matchType != null){data.matchType} else { "?"},
+            Text(text = if(data.matchType != null){data.matchType} else {"?"},
                 fontWeight = FontWeight.Light,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis)
