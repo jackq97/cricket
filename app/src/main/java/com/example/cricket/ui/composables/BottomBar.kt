@@ -70,6 +70,6 @@ enum class BottomBarItem(
 ) {
 
     CurrentMatchesScreen(HomeScreenDestination, Icons.Default.List, "Current Matches"),
-    AllMatchesScreen(MatchesScreenDestination, Icons.Default.Person, "Matches"),
-    SeriesScreen(SeriesScreenDestination, Icons.Default.Person, "Series")
+    AllMatchesScreen(MatchesScreenDestination, Icons.Default.List, "Matches"),
+    SeriesScreen(SeriesScreenDestination, Icons.Default.List, "Series")
 }

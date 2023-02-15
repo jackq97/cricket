@@ -13,19 +13,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.cricket.R
 import com.example.cricket.model.series.SeriesData
 import com.example.cricket.ui.composables.SeriesRow
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import java.text.SimpleDateFormat
 import java.util.*
 
 @Destination
 @Composable
-fun SeriesScreen( viewModel: SeriesViewModel = hiltViewModel()) {
+fun SeriesScreen( viewModel: SeriesViewModel = hiltViewModel(), navigator: DestinationsNavigator) {
 
     val swipeRefreshState = rememberSwipeRefreshState(
         isRefreshing = viewModel.state.isRefreshing
@@ -53,7 +56,7 @@ fun SeriesScreen( viewModel: SeriesViewModel = hiltViewModel()) {
 
                         val groupedMonth = series.data.groupBy { it.startDate.month }
 
-                        SeriesList(groupedMonth = groupedMonth)
+                        SeriesList(groupedMonth = groupedMonth, navigator = navigator)
                     }
                 }
             }
@@ -74,19 +77,21 @@ fun SeriesScreen( viewModel: SeriesViewModel = hiltViewModel()) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun SeriesList(groupedMonth: Map<Int , List<SeriesData>>) {
+fun SeriesList(groupedMonth: Map<Int , List<SeriesData>>, navigator: DestinationsNavigator) {
 
     LazyColumn() {
-        groupedMonth.forEach { (date, seriesData) ->
-            stickyHeader {
 
-                val dateFmt = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+        groupedMonth.forEach { (date, seriesData) ->
+
+            stickyHeader() {
+
+                val dateFmt = SimpleDateFormat("MMMM", Locale.getDefault())
 
                 Text(
                         text = dateFmt.format(seriesData.first().startDate),
                         color = Color.White,
                         modifier = Modifier
-                            .background(Color.Gray)
+                            .background(colorResource(R.color.light_purple))
                             .padding(5.dp)
                             .fillMaxWidth()
                     )
@@ -94,7 +99,7 @@ fun SeriesList(groupedMonth: Map<Int , List<SeriesData>>) {
             }
 
             items(items = seriesData) { data ->
-                SeriesRow(seriesData = data)
+                SeriesRow(seriesData = data, navigator = navigator)
             }
         }
     }

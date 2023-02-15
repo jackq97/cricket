@@ -12,18 +12,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.cricket.model.series.SeriesData
+import com.example.cricket.screen.destinations.SeriesInfoScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import java.text.SimpleDateFormat
 import java.util.*
 
 @Composable()
-fun SeriesRow(seriesData: SeriesData) {
+fun SeriesRow(seriesData: SeriesData, navigator: DestinationsNavigator) {
 
     Column(modifier = Modifier
         .height(IntrinsicSize.Max)
         .fillMaxWidth()
-        .padding(12.dp),
-        /*.clickable { navigator.navigate(SeriesInfoScreenDestination(id = seriesData.id)) },*/
+        .padding(12.dp)
+        .clickable { navigator.navigate(SeriesInfoScreenDestination(id = seriesData.id)) },
         horizontalAlignment = Alignment.Start,
 
         ) {
