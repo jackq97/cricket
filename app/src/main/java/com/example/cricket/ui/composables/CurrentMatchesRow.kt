@@ -1,6 +1,5 @@
 package com.example.cricket.ui.composables
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -27,9 +26,8 @@ import com.example.cricket.R
 import com.example.cricket.model.currentmatches.CurrentData
 import com.example.cricket.model.previewparameter.CurrentMatchesDataPreviewParameterProvider
 
-@SuppressLint("SuspiciousIndentation")
 @Composable
-fun CurrentMatchesRow(data: CurrentData) {
+fun SeriesInfoRow(data: CurrentData) {
 
     Column(modifier = Modifier
         .height(135.dp)
@@ -44,7 +42,7 @@ fun CurrentMatchesRow(data: CurrentData) {
     ) {
 
         Row {
-            Text(text = if(data.matchType != null){data.matchType} else {"?"},
+            Text(text = if(data.matchType != null){data.matchType.capitalize()} else {"?"},
                 fontWeight = FontWeight.Light,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis)
@@ -176,5 +174,5 @@ fun CurrentMatchesRow(data: CurrentData) {
 @Composable
 fun MatchesRowPreview(@PreviewParameter(CurrentMatchesDataPreviewParameterProvider::class) data: CurrentData){
 
-    CurrentMatchesRow(data = data)
+    SeriesInfoRow(data = data)
 }

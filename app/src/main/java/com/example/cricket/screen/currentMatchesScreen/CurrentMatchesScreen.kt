@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.cricket.model.currentmatches.CurrentData
-import com.example.cricket.ui.composables.CurrentMatchesRow
+import com.example.cricket.ui.composables.SeriesInfoRow
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.ramcosta.composedestinations.annotation.Destination
@@ -73,7 +73,7 @@ fun LazyMatchesRow(matches: List<CurrentData>){
     LazyColumn{
 
         items(items = matches) { data ->
-            CurrentMatchesRow(data = data)
+            SeriesInfoRow(data = data)
         }
     }
 }

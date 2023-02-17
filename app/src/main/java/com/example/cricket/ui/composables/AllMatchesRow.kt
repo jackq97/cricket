@@ -25,7 +25,6 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.cricket.R
 import com.example.cricket.model.allmatches.AllData
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -52,9 +51,7 @@ fun AllMatchesRow(allMatchesData: AllData) {
                 Row(modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically) {
 
-                    Text(text = if(allMatchesData.teamInfo != null && allMatchesData.teamInfo[0].shortname != null)
-                    {allMatchesData.teamInfo[0].shortname}
-                        else{allMatchesData.teams[0]},
+                    Text(text = allMatchesData.teamInfo[0].shortname,
                         modifier = Modifier
                             .weight(1f)
                             .padding(5.dp)
@@ -66,22 +63,11 @@ fun AllMatchesRow(allMatchesData: AllData) {
 
 
                     //coil
-                    if(allMatchesData.teamInfo != null)
-                        AsyncImage(
-                            model = ImageRequest.Builder(LocalContext.current)
-                                .data(allMatchesData.teamInfo[0].img)
-                                .crossfade(true)
-                                .build(),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .height(30.dp)
-                                .width(40.dp)
-                                .clip(shape = CircleShape)
-                        )
-                    else
-                        Image(
-                        painter = painterResource(id = R.drawable.fl_default),
+                    AsyncImage(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(allMatchesData.teamInfo[0].img)
+                            .crossfade(true)
+                            .build(),
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
@@ -129,7 +115,7 @@ fun AllMatchesRow(allMatchesData: AllData) {
                         )
                     }
 
-                    if (allMatchesData.teamInfo != null && allMatchesData.teamInfo.size > 1){
+                    if (allMatchesData.teamInfo.size > 1){
                         //coil
                         AsyncImage(
                             model = ImageRequest.Builder(LocalContext.current)
@@ -157,9 +143,7 @@ fun AllMatchesRow(allMatchesData: AllData) {
                     }
 
                     Text(
-                        text = if(allMatchesData.teamInfo != null &&
-                            allMatchesData.teamInfo.size > 1 &&
-                            allMatchesData.teamInfo[1].shortname != null){allMatchesData.teamInfo[1].shortname}
+                        text = if(allMatchesData.teamInfo.size > 1){allMatchesData.teamInfo[1].shortname}
                         else{allMatchesData.teams[1]},
                         modifier = Modifier
                             .weight(1f)

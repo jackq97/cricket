@@ -11,7 +11,7 @@ import com.example.cricket.ui.composables.TopBar
 import com.ramcosta.composedestinations.DestinationsNavHost
 
 @Composable
-fun SampleApp(){
+fun MainApp(){
 
     val navController = rememberNavController()
 

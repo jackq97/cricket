@@ -14,13 +14,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CricketTheme {
-                SampleApp()
+                MainApp()
             }
         }
     }
 }
-
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
