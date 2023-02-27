@@ -10,11 +10,12 @@ import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class GsonDateDeSerializer implements JsonDeserializer<Date> {
 
-    private SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-    private SimpleDateFormat format2 = new SimpleDateFormat("MMM dd");
+    private final SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    private final SimpleDateFormat format2 = new SimpleDateFormat("MMM dd", Locale.getDefault());
 
     @Override
     public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {

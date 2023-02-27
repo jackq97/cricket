@@ -2,7 +2,6 @@ package com.example.cricket.ui.composables
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,7 +16,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import java.text.SimpleDateFormat
 import java.util.*
 
-@Composable()
+@Composable
 fun SeriesRow(seriesData: SeriesData, navigator: DestinationsNavigator) {
 
     Column(modifier = Modifier

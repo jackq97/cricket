@@ -1,6 +1,6 @@
-
 package com.example.cricket.ui.composables
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -51,7 +51,9 @@ fun AllMatchesRow(allMatchesData: AllData) {
                 Row(modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically) {
 
-                    Text(text = allMatchesData.teamInfo[0].shortname,
+                    Text(text = if(allMatchesData.teamInfo != null && allMatchesData.teamInfo[0].shortname != null)
+                    {allMatchesData.teamInfo[0].shortname}
+                        else{allMatchesData.teams[0]},
                         modifier = Modifier
                             .weight(1f)
                             .padding(5.dp)
@@ -63,11 +65,22 @@ fun AllMatchesRow(allMatchesData: AllData) {
 
 
                     //coil
-                    AsyncImage(
-                        model = ImageRequest.Builder(LocalContext.current)
-                            .data(allMatchesData.teamInfo[0].img)
-                            .crossfade(true)
-                            .build(),
+                    if(allMatchesData.teamInfo != null)
+                        AsyncImage(
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(allMatchesData.teamInfo[0].img)
+                                .crossfade(true)
+                                .build(),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .height(30.dp)
+                                .width(40.dp)
+                                .clip(shape = CircleShape)
+                        )
+                    else
+                        Image(
+                        painter = painterResource(id = R.drawable.fl_default),
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
@@ -82,13 +95,10 @@ fun AllMatchesRow(allMatchesData: AllData) {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
 
-                        val timeFmt = SimpleDateFormat("hh:mm", Locale.US)
+                        val timeFmt = SimpleDateFormat("hh:mm", Locale.getDefault())
+                        val dateFmt = SimpleDateFormat("dd MMM", Locale.getDefault())
 
-                        /*val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
-                        val outputFormat: DateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-                        //val inputText = "2012-11-17T00:00:00.000-05:00"
-                        val date: Date = inputFormat.parse(allMatchesData.dateTimeGMT) as Date
-                        val outputText: String = outputFormat.format(date)*/
+                        Log.d("dates ", "AllMatchesRow: ${timeFmt.format(allMatchesData.dateTimeGMT)} \n ${dateFmt.format(allMatchesData.dateTimeGMT)}")
 
                         Text(
                             text = timeFmt.format(allMatchesData.dateTimeGMT),
@@ -98,16 +108,6 @@ fun AllMatchesRow(allMatchesData: AllData) {
                             fontSize = 10.sp
                         )
 
-                        //TODO("date for matches")
-
-                        val dateFmt = SimpleDateFormat("dd MMM", Locale.getDefault())
-
-                        /*val fmtInputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
-                        val fmtOutputFormat: DateFormat = SimpleDateFormat("dd MM", Locale.getDefault())
-                        //val fmtInputText = "2012-11-17T00:00:00.000-05:00"
-                        val fmtDate: Date = fmtOutputFormat.parse(allMatchesData.dateTimeGMT) as Date
-                        val fmtOutputText: String = outputFormat.format(fmtDate)*/
-
                         Text(
                             text = dateFmt.format(allMatchesData.dateTimeGMT),
                             color = Color(0xFFA7A6AB),
@@ -115,7 +115,7 @@ fun AllMatchesRow(allMatchesData: AllData) {
                         )
                     }
 
-                    if (allMatchesData.teamInfo.size > 1){
+                    if (allMatchesData.teamInfo != null && allMatchesData.teamInfo.size > 1){
                         //coil
                         AsyncImage(
                             model = ImageRequest.Builder(LocalContext.current)
@@ -143,7 +143,9 @@ fun AllMatchesRow(allMatchesData: AllData) {
                     }
 
                     Text(
-                        text = if(allMatchesData.teamInfo.size > 1){allMatchesData.teamInfo[1].shortname}
+                        text = if(allMatchesData.teamInfo != null &&
+                            allMatchesData.teamInfo.size > 1 &&
+                            allMatchesData.teamInfo[1].shortname != null){allMatchesData.teamInfo[1].shortname}
                         else{allMatchesData.teams[1]},
                         modifier = Modifier
                             .weight(1f)

@@ -5,16 +5,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.cricket.R
 import com.example.cricket.model.series.SeriesData
@@ -36,27 +35,40 @@ fun SeriesScreen( viewModel: SeriesViewModel = hiltViewModel(), navigator: Desti
 
     val state = viewModel.state
 
-    if (state.error == null) {
+    Surface(
+        modifier = Modifier
+            .fillMaxSize(),
+        color = MaterialTheme.colors.background
+    ) {
 
-        Surface(
-            modifier = Modifier
-                .fillMaxSize(),
-            color = MaterialTheme.colors.background
-        ) {
+        Column {
 
-            state.series?.let { series ->
+            TopAppBar {
+                Spacer(Modifier.width(8.dp))
 
-                Column(modifier = Modifier.fillMaxSize()) {
+                Text(
+                    text = "Series",
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 20.sp
+                )
+            }
 
-                    SwipeRefresh(
-                        state = swipeRefreshState,
-                        onRefresh = {
-                            viewModel.onEvent(SeriesEvent.Refresh)
-                        }) {
+            if (state.error == null) {
 
-                        val groupedMonth = series.data.groupBy { it.startDate.month }
+                state.series?.let { series ->
 
-                        SeriesList(groupedMonth = groupedMonth, navigator = navigator)
+                    Column(modifier = Modifier.fillMaxSize()) {
+
+                        SwipeRefresh(
+                            state = swipeRefreshState,
+                            onRefresh = {
+                                viewModel.onEvent(SeriesEvent.Refresh)
+                            }) {
+
+                            val groupedMonth = series.data.groupBy { it.startDate?.month }
+
+                            SeriesList(groupedMonth = groupedMonth, navigator = navigator)
+                        }
                     }
                 }
             }
@@ -70,14 +82,17 @@ fun SeriesScreen( viewModel: SeriesViewModel = hiltViewModel(), navigator: Desti
             if (state.isLoading) {
                 CircularProgressIndicator()
             } else if (state.error != null) {
-
+                Text(
+                    text = state.error,
+                    color = MaterialTheme.colors.error
+                )
             }
         }
     }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun SeriesList(groupedMonth: Map<Int , List<SeriesData>>, navigator: DestinationsNavigator) {
+fun SeriesList(groupedMonth: Map<Int? , List<SeriesData>>, navigator: DestinationsNavigator) {
 
     LazyColumn() {
 

@@ -95,7 +95,8 @@ fun MatchesScreen(allMatchesViewModel: AllMatchesViewModel = hiltViewModel()) {
 @Composable
 fun LazyAllMatchesRow(matches: List<AllData>){
 
-    LazyColumn(modifier = Modifier) {
+    LazyColumn(modifier = Modifier,
+    reverseLayout = true) {
 
         items(items = matches) { data ->
             AllMatchesRow(allMatchesData = data)

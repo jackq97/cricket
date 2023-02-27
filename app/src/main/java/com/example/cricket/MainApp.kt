@@ -17,7 +17,7 @@ fun MainApp(){
 
     Scaffold(
 
-        topBar = { TopBar() },
+        topBar = {  },
         bottomBar = { BottomBar(navController = navController) },
         content = {
             DestinationsNavHost(

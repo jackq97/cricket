@@ -20,12 +20,12 @@ class CricketRepository @Inject constructor(
         } catch(e: IOException) {
             e.printStackTrace()
             Resource.Error(
-                message = "Couldn't load company info"
+                message = "Couldn't load match data"
             )
         } catch(e: HttpException) {
             e.printStackTrace()
             Resource.Error(
-                message = "Couldn't load company info"
+                message = "Couldn't load match data"
             )
         }
     }
@@ -37,12 +37,12 @@ class CricketRepository @Inject constructor(
         } catch(e: IOException) {
             e.printStackTrace()
             Resource.Error(
-                message = "Couldn't load company info"
+                message = "Couldn't load match data"
             )
         } catch(e: HttpException) {
             e.printStackTrace()
             Resource.Error(
-                message = "Couldn't load company info"
+                message = "Couldn't load match data"
             )
         }
     }
@@ -53,12 +53,12 @@ class CricketRepository @Inject constructor(
         } catch(e: IOException) {
             e.printStackTrace()
             Resource.Error(
-                message = "Couldn't load company info"
+                message = "Couldn't load match data"
             )
         } catch(e: HttpException) {
             e.printStackTrace()
             Resource.Error(
-                message = "Couldn't load company info"
+                message = "Couldn't load match data"
             )
         }
     }
@@ -70,12 +70,12 @@ class CricketRepository @Inject constructor(
         } catch(e: IOException) {
             e.printStackTrace()
             Resource.Error(
-                message = "Couldn't load intraday info"
+                message = "Couldn't load match data"
             )
         } catch(e: HttpException) {
             e.printStackTrace()
             Resource.Error(
-                message = "Couldn't load intraday info"
+                message = "Couldn't load match data"
             )
         }
     }

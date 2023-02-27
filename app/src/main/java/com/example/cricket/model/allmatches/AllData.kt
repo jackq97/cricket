@@ -5,7 +5,7 @@ import java.util.*
 data class AllData(
     val bbbEnabled: Boolean,
     val date: String,
-    val dateTimeGMT: Date,
+    val dateTimeGMT: Date?,
     val fantasyEnabled: Boolean,
     val hasSquad: Boolean,
     val id: String,
