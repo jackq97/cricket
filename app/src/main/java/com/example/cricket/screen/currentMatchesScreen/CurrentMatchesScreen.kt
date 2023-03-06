@@ -21,7 +21,7 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @RootNavGraph(start = true)
-@Destination
+@Destination(route = "main_feed")
 @Composable
 fun HomeScreen(viewModel: CurrentMatchesViewModel = hiltViewModel(), navigator: DestinationsNavigator) {
 

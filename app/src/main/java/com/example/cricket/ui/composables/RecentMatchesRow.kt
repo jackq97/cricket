@@ -1,6 +1,8 @@
 package com.example.cricket.ui.composables
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material3.Text
@@ -22,37 +24,41 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.cricket.R
 import com.example.cricket.model.currentmatches.CurrentData
+import com.example.cricket.screen.destinations.SeriesInfoScreenDestination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
-fun RecentMatchesRow(data: CurrentData) {
+fun RecentMatchesRow(data: CurrentData, navigator: DestinationsNavigator) {
 
     if(data.matchEnded) {
-        Column(
-            modifier = Modifier
-                .height(128.dp)
-                .fillMaxWidth()
-                .padding(
-                    start = 12.dp,
-                    end = 12.dp,
-                    top = 12.dp,
-                    bottom = 8.dp
-                ),
+        Column(modifier = Modifier
+            .height(135.dp)
+            .fillMaxWidth()
+            .padding(
+                start = 12.dp,
+                end = 12.dp,
+                top = 12.dp,
+                bottom = 8.dp
+            ),
             horizontalAlignment = Alignment.Start,
         ) {
 
-            Text(
-                text = "${data.matchType} • ${data.name}",
-                fontWeight = FontWeight.Light,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
+            Row {
+                Text(text = if(data.matchType != null){data.matchType.replaceFirstChar { it.uppercase() }} else {"?"},
+                    fontWeight = FontWeight.Light,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis)
 
-            Row(
-                modifier = Modifier
-                    .padding(top = 3.dp)
-            ) {
+                Text(text = " • ${data.name}",
+                    fontWeight = FontWeight.Light,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis)
+            }
 
-                if (data.teamInfo != null)
+            Row(modifier = Modifier
+                .padding(top = 3.dp)) {
+
+                if(data.teamInfo != null)
                 //coil
                     AsyncImage(
                         model = ImageRequest.Builder(LocalContext.current)
@@ -66,6 +72,7 @@ fun RecentMatchesRow(data: CurrentData) {
                             .width(40.dp)
                             .clip(shape = RectangleShape)
                     )
+
                 else
                     Image(
                         painter = painterResource(id = R.drawable.fl_default),
@@ -77,32 +84,24 @@ fun RecentMatchesRow(data: CurrentData) {
                             .clip(shape = RectangleShape)
                     )
 
-                Text(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(start = 3.dp),
-                    text = if (data.teamInfo != null && data.teamInfo[0].shortname != null) {
-                        data.teamInfo[0].shortname
-                    } else {
-                        data.teams[0]
-                    },
+                Text(modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 3.dp),
+                    text = if(data.teamInfo != null && data.teamInfo[0].shortname != null){data.teamInfo[0].shortname}
+                    else{data.teams[0]},
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+                    overflow = TextOverflow.Ellipsis)
 
                 if (data.score.isNotEmpty())
-                    Text(
-                        modifier = Modifier.weight(1f),
+                    Text(modifier = Modifier.weight(1f),
                         textAlign = TextAlign.End,
                         text = "${data.score[0].r}-${data.score[0].w} (${data.score[0].o})",
                         fontWeight = FontWeight.Bold
                     )
             }
 
-            Row(
-                modifier = Modifier
-                    .padding(top = 5.dp)
-            ) {
+            Row(modifier = Modifier
+                .padding(top = 5.dp)) {
 
                 if (data.teamInfo != null && data.teamInfo.size > 1)
                 //coil
@@ -118,7 +117,8 @@ fun RecentMatchesRow(data: CurrentData) {
                             .width(40.dp)
                             .clip(shape = RectangleShape)
                     )
-                else
+
+                else {
                     Image(
                         painter = painterResource(id = R.drawable.fl_default),
                         contentDescription = null,
@@ -128,50 +128,47 @@ fun RecentMatchesRow(data: CurrentData) {
                             .width(40.dp)
                             .clip(shape = RectangleShape)
                     )
+                }
 
-                Text(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(start = 3.dp),
-                    text = if (data.teamInfo != null &&
-                         data.teamInfo.size > 1 &&
-                        data.teamInfo[1].shortname != null) {
-                        data.teamInfo[1].shortname
-                    } else {
-                        data.teams[1]
-                    },
+                Text(modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 3.dp),
+                    text = if(data.teamInfo[1].shortname != null){data.teamInfo[1].shortname}
+                    else{data.teams[1]},
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+                    overflow = TextOverflow.Ellipsis)
 
-                if (data.score.size > 1)
-                    Text(
-                        modifier = Modifier.weight(1f),
+                if(data.score.size > 1)
+                    Text(modifier = Modifier.weight(1f),
                         textAlign = TextAlign.End,
                         text = "${data.score[1].r}-${data.score[1].w} (${data.score[1].o})",
-                        fontWeight = FontWeight.Bold
-                    )
+                        fontWeight = FontWeight.Bold)
             }
 
-            Text(
-                modifier = Modifier
-                    .padding(5.dp),
+            Text(modifier = Modifier
+                .padding(5.dp),
                 text = data.status,
                 color = Color(0xFF7AC4EB)
             )
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(20.dp),
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .height(20.dp),
                 horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+                verticalAlignment = Alignment.CenterVertically) {
 
-                Text(
-                    fontSize = 11.sp,
-                    text = "SCHEDULE"
-                )
+                Column(modifier = Modifier
+                    .width(80.dp)
+                    .background(color = Color.LightGray, shape = RectangleShape),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(modifier = Modifier.clickable { navigator.navigate(
+                        SeriesInfoScreenDestination(data.series_id)
+                    ) },
+                        text = "SCHEDULE"
+                    )
+                }
             }
         }
 

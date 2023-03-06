@@ -21,10 +21,12 @@ import com.example.cricket.ui.composables.RecentMatchesRow
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Destination
 @Composable
-fun MatchesScreen(allMatchesViewModel: AllMatchesViewModel = hiltViewModel()) {
+fun MatchesScreen(allMatchesViewModel: AllMatchesViewModel = hiltViewModel(),
+navigator: DestinationsNavigator) {
 
 
     val swipeRefreshState = rememberSwipeRefreshState(
@@ -46,7 +48,7 @@ fun MatchesScreen(allMatchesViewModel: AllMatchesViewModel = hiltViewModel()) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
 
-                    CustomRadioGroup() {
+                    CustomRadioGroup {
                         selectedRadioOption = it
                     }
 
@@ -69,7 +71,7 @@ fun MatchesScreen(allMatchesViewModel: AllMatchesViewModel = hiltViewModel()) {
 
                         state.currentMatches?.let { currentMatches ->
 
-                            LazyRecentMatchesRow(matches = currentMatches.data)
+                            LazyRecentMatchesRow(matches = currentMatches.data, navigator = navigator)
                         }
                     }
                 }
@@ -105,12 +107,12 @@ fun LazyAllMatchesRow(matches: List<AllData>){
 }
 
 @Composable
-fun LazyRecentMatchesRow(matches: List<CurrentData>){
+fun LazyRecentMatchesRow(matches: List<CurrentData>, navigator: DestinationsNavigator){
 
     LazyColumn(modifier = Modifier) {
 
         items(items = matches) { data ->
-            RecentMatchesRow(data = data)
+            RecentMatchesRow(data = data, navigator = navigator)
         }
     }
 }
