@@ -1,6 +1,5 @@
 package com.example.cricket.screen.allseries
 
-import com.example.cricket.model.currentmatches.CurrentMatches
 import com.example.cricket.model.series.Series
 
 data class SeriesState(

@@ -94,11 +94,11 @@ fun SeriesScreen( viewModel: SeriesViewModel = hiltViewModel(), navigator: Desti
 @Composable
 fun SeriesList(groupedMonth: Map<Int? , List<SeriesData>>, navigator: DestinationsNavigator) {
 
-    LazyColumn() {
+    LazyColumn {
 
         groupedMonth.forEach { (date, seriesData) ->
 
-            stickyHeader() {
+            stickyHeader {
 
                 val dateFmt = SimpleDateFormat("MMMM", Locale.getDefault())
 
