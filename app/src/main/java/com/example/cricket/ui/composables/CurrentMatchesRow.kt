@@ -1,8 +1,8 @@
 package com.example.cricket.ui.composables
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material3.Text
@@ -26,10 +26,11 @@ import coil.request.ImageRequest
 import com.example.cricket.R
 import com.example.cricket.model.currentmatches.CurrentData
 import com.example.cricket.model.previewparameter.CurrentMatchesDataPreviewParameterProvider
+import com.example.cricket.screen.destinations.SeriesInfoScreenDestination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-@SuppressLint("SuspiciousIndentation")
 @Composable
-fun CurrentMatchesRow(data: CurrentData) {
+fun CurrentMatchesRow(data: CurrentData, navigator: DestinationsNavigator) {
 
     Column(modifier = Modifier
         .height(135.dp)
@@ -44,7 +45,7 @@ fun CurrentMatchesRow(data: CurrentData) {
     ) {
 
         Row {
-            Text(text = if(data.matchType != null){data.matchType} else { "?"},
+            Text(text = if(data.matchType != null){data.matchType.replaceFirstChar { it.uppercase() }} else {"?"},
                 fontWeight = FontWeight.Light,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis)
@@ -118,16 +119,17 @@ fun CurrentMatchesRow(data: CurrentData) {
                     .clip(shape = RectangleShape)
             )
 
-            else
-            Image(
-                painter = painterResource(id = R.drawable.fl_default),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .height(20.dp)
-                    .width(40.dp)
-                    .clip(shape = RectangleShape)
-            )
+            else {
+                Image(
+                    painter = painterResource(id = R.drawable.fl_default),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .height(20.dp)
+                        .width(40.dp)
+                        .clip(shape = RectangleShape)
+                )
+            }
 
             Text(modifier = Modifier
                 .weight(1f)
@@ -156,12 +158,13 @@ fun CurrentMatchesRow(data: CurrentData) {
             horizontalArrangement = Arrangement.End,
             verticalAlignment = Alignment.CenterVertically) {
 
-            Column(modifier = Modifier.width(80.dp)
+            Column(modifier = Modifier
+                .width(80.dp)
                 .background(color = Color.LightGray, shape = RectangleShape),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
+                Text(modifier = Modifier.clickable { navigator.navigate(SeriesInfoScreenDestination(data.series_id)) },
                     text = "SCHEDULE"
                 )
             }
@@ -169,12 +172,11 @@ fun CurrentMatchesRow(data: CurrentData) {
     }
 
     Divider(modifier = Modifier.fillMaxWidth())
-
 }
 
 @Preview(showBackground = true)
 @Composable
 fun MatchesRowPreview(@PreviewParameter(CurrentMatchesDataPreviewParameterProvider::class) data: CurrentData){
 
-    CurrentMatchesRow(data = data)
+    //CurrentMatchesRow(data = data)
 }

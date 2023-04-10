@@ -6,7 +6,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
@@ -70,6 +69,6 @@ enum class BottomBarItem(
 ) {
 
     CurrentMatchesScreen(HomeScreenDestination, Icons.Default.List, "Current Matches"),
-    AllMatchesScreen(MatchesScreenDestination, Icons.Default.Person, "Matches"),
-    SeriesScreen(SeriesScreenDestination, Icons.Default.Person, "Series")
+    AllMatchesScreen(MatchesScreenDestination, Icons.Default.List, "Matches"),
+    SeriesScreen(SeriesScreenDestination, Icons.Default.List, "Series")
 }

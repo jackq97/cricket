@@ -1,12 +1,15 @@
 package com.example.cricket.model.previewparameter
 
-/*
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.example.cricket.model.allmatches.AllData
+import com.example.cricket.model.allmatches.TeamInfo
+
 class AllMatchesDataPreviewParameterProvider : PreviewParameterProvider<AllData> {
 
     override val values = sequenceOf(
         AllData(bbbEnabled = false,
             date = "11 OCT",
-            dateTimeGMT = "12:30",
+            dateTimeGMT = null,
             fantasyEnabled = false,
             hasSquad = true, id = "1",
             matchEnded = false,
@@ -21,4 +24,4 @@ class AllMatchesDataPreviewParameterProvider : PreviewParameterProvider<AllData>
             teams = listOf("india","pakistan"),
             venue = "narendrea modi stadium"),
         )
-}*/
+}

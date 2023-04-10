@@ -1,5 +1,6 @@
 package com.example.cricket.ui.composables
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -94,7 +95,10 @@ fun AllMatchesRow(allMatchesData: AllData) {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
 
-                        val timeFmt = SimpleDateFormat("HH:mm", Locale.getDefault())
+                        val timeFmt = SimpleDateFormat("hh:mm", Locale.getDefault())
+                        val dateFmt = SimpleDateFormat("dd MMM", Locale.getDefault())
+
+                        Log.d("dates ", "AllMatchesRow: ${timeFmt.format(allMatchesData.dateTimeGMT)} \n ${dateFmt.format(allMatchesData.dateTimeGMT)}")
 
                         Text(
                             text = timeFmt.format(allMatchesData.dateTimeGMT),
@@ -103,8 +107,6 @@ fun AllMatchesRow(allMatchesData: AllData) {
                             color = Color(0xFFE5493E),
                             fontSize = 10.sp
                         )
-
-                        val dateFmt = SimpleDateFormat("dd MMM", Locale.getDefault())
 
                         Text(
                             text = dateFmt.format(allMatchesData.dateTimeGMT),

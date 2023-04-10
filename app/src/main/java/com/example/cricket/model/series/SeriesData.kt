@@ -9,7 +9,7 @@ data class SeriesData(
     var name: String,
     var odi: Int,
     var squads: Int,
-    var startDate: Date,
+    var startDate: Date?,
     var t20: Int,
     var test: Int
 )

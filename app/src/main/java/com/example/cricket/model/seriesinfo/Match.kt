@@ -1,9 +1,11 @@
 package com.example.cricket.model.seriesinfo
 
+import java.util.*
+
 data class Match(
     val bbbEnabled: Boolean,
     val date: String,
-    val dateTimeGMT: String,
+    val dateTimeGMT: Date?,
     val fantasyEnabled: Boolean,
     val hasSquad: Boolean,
     val id: String,

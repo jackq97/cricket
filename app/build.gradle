@@ -73,7 +73,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
 
     //Dagger - Hilt
-    implementation 'com.google.dagger:hilt-android:2.44.2'
+    implementation 'com.google.dagger:hilt-android:2.45'
     //May need ok http also
 
     // Dagger - Hilt
@@ -86,6 +86,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     //GSON converter
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
 
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
@@ -104,11 +105,11 @@ dependencies {
     implementation 'com.google.accompanist:accompanist-swiperefresh:0.28.0'
 
     //material theme
-    implementation('androidx.compose.material3:material3:1.1.0-alpha04')
-    implementation('androidx.compose.material3:material3-window-size-class:1.1.0-alpha04')
+    implementation('androidx.compose.material3:material3:1.1.0-alpha06')
+    implementation('androidx.compose.material3:material3-window-size-class:1.1.0-alpha06')
 
     //navigation
-    implementation ("androidx.navigation:navigation-compose:2.6.0-alpha04")
+    implementation ('androidx.navigation:navigation-compose:2.6.0-alpha05')
 
     //compose destinations
     implementation 'io.github.raamcosta.compose-destinations:core:1.8.33-beta'
