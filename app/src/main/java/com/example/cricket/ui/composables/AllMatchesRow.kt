@@ -98,7 +98,7 @@ fun AllMatchesRow(allMatchesData: AllData) {
                         val timeFmt = SimpleDateFormat("hh:mm", Locale.getDefault())
                         val dateFmt = SimpleDateFormat("dd MMM", Locale.getDefault())
 
-                        Log.d("dates ", "AllMatchesRow: ${timeFmt.format(allMatchesData.dateTimeGMT)} \n ${dateFmt.format(allMatchesData.dateTimeGMT)}")
+                        Log.d("dates ", "AllMatchesRow:  ${allMatchesData.date} ")
 
                         Text(
                             text = timeFmt.format(allMatchesData.dateTimeGMT),

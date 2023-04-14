@@ -23,7 +23,8 @@ object AppModule {
     fun providesMatchesRepository(api: MatchesApi) = CricketRepository(api)
 
     private var gson = GsonBuilder()
-        .registerTypeAdapter(Date::class.java, GsonDateDeSerializer())
+        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        //.registerTypeAdapter(Date::class.java, GsonDateDeSerializer())
         .create()
 
     @Singleton

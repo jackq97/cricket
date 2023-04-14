@@ -10,9 +10,10 @@ class CurrentMatchesDataPreviewParameterProvider : PreviewParameterProvider<Curr
     override val values = sequenceOf(
         CurrentData(bbbEnabled = false,
             date = "12:00",
-            dateTimeGMT = "GMT",
+            dateTimeGMT = null,
             fantasyEnabled = false,
-            hasSquad = true, id = "1",
+            hasSquad = true,
+            id = "1",
             matchEnded = false,
             matchStarted = true,
             matchType = "t20",

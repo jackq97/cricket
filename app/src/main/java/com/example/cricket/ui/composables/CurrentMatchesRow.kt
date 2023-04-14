@@ -4,7 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Divider
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,9 +29,25 @@ import com.example.cricket.model.currentmatches.CurrentData
 import com.example.cricket.model.previewparameter.CurrentMatchesDataPreviewParameterProvider
 import com.example.cricket.screen.destinations.SeriesInfoScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable
 fun CurrentMatchesRow(data: CurrentData, navigator: DestinationsNavigator) {
+
+    // TODO: make this a function
+
+    val dateTime = data.dateTimeGMT!!
+    val timeFmt = SimpleDateFormat("hh:mm", Locale.getDefault())
+
+    val sourceTimeZone = TimeZone.getTimeZone("GMT") // the current timezone of the date object
+    val destinationTimeZone = TimeZone.getDefault() // the timezone you want to convert to (IST)
+
+    val sourceOffset = sourceTimeZone.getOffset(dateTime.time)
+    val destinationOffset = destinationTimeZone.getOffset(dateTime.time)
+    val adjustedTime = dateTime.time + (destinationOffset - sourceOffset)
+    val adjustedDate = Date(adjustedTime)
 
     Column(modifier = Modifier
         .height(135.dp)
@@ -44,18 +61,37 @@ fun CurrentMatchesRow(data: CurrentData, navigator: DestinationsNavigator) {
         horizontalAlignment = Alignment.Start,
     ) {
 
-        Row {
-            Text(text = if(data.matchType != null){data.matchType.replaceFirstChar { it.uppercase() }} else {"?"},
+        Row(modifier = Modifier.height(20.dp),
+            horizontalArrangement = Arrangement.End
+            ) {
+
+            Text(modifier = Modifier,
+                text = if(data.matchType != null){data.matchType.replaceFirstChar { it.uppercase() }} else {"?"},
                 fontWeight = FontWeight.Light,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis)
 
-            Text(text = " • ${data.name}",
+            Text(modifier = Modifier.width(320.dp),
+                text = " • ${data.name}",
                 fontWeight = FontWeight.Light,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis)
+
+            //Spacer(modifier = Modifier.width(200.dp))
+
+            val currentTimeMillis = System.currentTimeMillis()
+
+            if (currentTimeMillis < dateTime.time)
+                IconButton(modifier = Modifier,
+                    onClick = { /*TODO*/ }) {
+
+                    Icon(
+                        painter = painterResource(id = R.drawable.outline_notifications_24),
+                        contentDescription = "set reminder"
+                    )
+                }
         }
-
+        
         Row(modifier = Modifier
             .padding(top = 3.dp)) {
 
@@ -155,8 +191,12 @@ fun CurrentMatchesRow(data: CurrentData, navigator: DestinationsNavigator) {
         Row(modifier = Modifier
             .fillMaxWidth()
             .height(20.dp),
-            horizontalArrangement = Arrangement.End,
+            horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically) {
+
+            Text(text = timeFmt.format(adjustedTime))
+
+            Spacer(modifier = Modifier.width(250.dp))
 
             Column(modifier = Modifier
                 .width(80.dp)
@@ -164,19 +204,19 @@ fun CurrentMatchesRow(data: CurrentData, navigator: DestinationsNavigator) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+
                 Text(modifier = Modifier.clickable { navigator.navigate(SeriesInfoScreenDestination(data.series_id)) },
                     text = "SCHEDULE"
                 )
             }
+
         }
     }
 
-    Divider(modifier = Modifier.fillMaxWidth())
 }
-
 @Preview(showBackground = true)
 @Composable
 fun MatchesRowPreview(@PreviewParameter(CurrentMatchesDataPreviewParameterProvider::class) data: CurrentData){
 
-    //CurrentMatchesRow(data = data)
+    CurrentMatchesRow(data = data, navigator = EmptyDestinationsNavigator)
 }
