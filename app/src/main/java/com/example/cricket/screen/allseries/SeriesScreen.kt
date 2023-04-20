@@ -1,4 +1,4 @@
-package com.example.cricket.screen.allseries
+package com.example.cricket.screen.allseriesQ
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -46,7 +46,7 @@ fun SeriesScreen( viewModel: SeriesViewModel = hiltViewModel(), navigator: Desti
             TopAppBar {
                 Spacer(Modifier.width(8.dp))
 
-                Text(
+                Text
                     text = "Series",
                     fontWeight = FontWeight.ExtraBold,
                     fontSize = 20.sp
