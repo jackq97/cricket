@@ -1,6 +1,5 @@
 package com.example.cricket
 
-import android.util.Log
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
@@ -80,6 +79,5 @@ fun MainApp(){
                 navGraph = NavGraphs.root,
                 modifier = Modifier.padding(it),
             )
-            Log.d("destination name", "MainApp: ${navBackStackEntry?.destination?.route}")
         })
 }

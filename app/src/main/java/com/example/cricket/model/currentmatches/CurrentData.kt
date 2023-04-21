@@ -1,9 +1,11 @@
 package com.example.cricket.model.currentmatches
 
+import java.util.Date
+
 data class CurrentData(
     var bbbEnabled: Boolean,
     var date: String,
-    var dateTimeGMT: String,
+    var dateTimeGMT: Date?,
     var fantasyEnabled: Boolean,
     var hasSquad: Boolean,
     var id: String,
