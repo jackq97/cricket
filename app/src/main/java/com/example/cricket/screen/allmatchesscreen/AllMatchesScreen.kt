@@ -97,8 +97,7 @@ navigator: DestinationsNavigator) {
 @Composable
 fun LazyAllMatchesRow(matches: List<AllData>){
 
-    LazyColumn(modifier = Modifier,
-    reverseLayout = true) {
+    LazyColumn(modifier = Modifier) {
 
         items(items = matches) { data ->
             AllMatchesRow(allMatchesData = data)
