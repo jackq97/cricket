@@ -1,3 +1,11 @@
+<div align="center">
+  <img alt="app info" src="art/banner.png" width="800px">
+</div>
+
+# **Cricket**
+
+### **Cricket** is a simple cricket score app that gives you info about current matches , recent and upcoming ones with score and all the info about Series and the matches in it with jetpack compose and clean architecture
+
 ## Built With 🛠
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android
   development.
