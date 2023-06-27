@@ -39,7 +39,7 @@ interface MatchesApi {
     ): SeriesInfo
 
     companion object {
-        const val API_KEY = "78d98990-7f82-498f-bec5-4d1bf21e9f28"
+        const val API_KEY = ""
         const val BASE_URL = "https://api.cricapi.com/v1/"
         const val OFFSET = 0
     }

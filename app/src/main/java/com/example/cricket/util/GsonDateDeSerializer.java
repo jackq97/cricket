@@ -17,9 +17,6 @@ public class GsonDateDeSerializer implements JsonDeserializer<Date> {
     private final SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     private final SimpleDateFormat format2 = new SimpleDateFormat("MMM dd", Locale.getDefault());
 
-
-
-
     @Override
     public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         try {
